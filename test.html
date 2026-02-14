@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan Spesial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ================= RESET DAN GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 25%, #a8edea 50%, #fed6e3 75%, #ff9a9e 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    /* Efek overlay romantis */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255, 182, 193, 0.1) 0%, rgba(255, 240, 245, 0.3) 50%, rgba(255, 228, 225, 0.1) 100%);
+      z-index: -2;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ================= ANIMATIONS BACKGROUND ================= */
+    .animations-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hearts-container,
+    .stars-container,
+    .loves-container,
+    .sparkles-container,
+    .glows-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Hati jatuh */
+    .heart {
+      position: absolute;
+      color: #ff1493;
+      font-size: 1.8rem;
+      animation: fall linear infinite;
+      text-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+      filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.6));
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg) scale(0.5); opacity: 0; }
+      10% { opacity: 1; transform: translateY(-80vh) rotate(30deg) scale(1); }
+      90% { opacity: 1; transform: translateY(80vh) rotate(330deg) scale(1); }
+      100% { transform: translateY(100vh) rotate(360deg) scale(0.5); opacity: 0; }
+    }
+
+    /* Bintang berkedip */
+    .star {
+      position: absolute;
+      color: #ffd700;
+      font-size: 1.3rem;
+      animation: twinkle ease-in-out infinite;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.3) rotate(0deg); }
+      25% { opacity: 0.6; transform: scale(0.8) rotate(90deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+      75% { opacity: 0.6; transform: scale(0.8) rotate(270deg); }
+    }
+
+    /* Emoji love floating */
+    .love {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: float ease-in-out infinite;
+      text-shadow: 0 0 15px rgba(255, 107, 157, 0.7);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0.6; }
+      25% { transform: translateY(-15px) rotate(90deg) scale(1); opacity: 0.9; }
+      50% { transform: translateY(-30px) rotate(180deg) scale(1.2); opacity: 1; }
+      75% { transform: translateY(-15px) rotate(270deg) scale(1); opacity: 0.9; }
+    }
+
+    /* Efek kilau */
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #ff1493 0%, transparent 70%);
+      border-radius: 50%;
+      animation: sparkleEffect ease-in-out infinite;
+    }
+
+    @keyframes sparkleEffect {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* Efek glow romantis */
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 20, 147, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glowPulse ease-in-out infinite;
+      filter: blur(40px);
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    /* ================= HALAMAN AWAL ================= */
+    #halamanAwal {
+      text-align: center;
+      padding: 40px 30px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.85));
+      border-radius: 30px;
+      box-shadow: 
+        0 15px 50px rgba(255, 107, 157, 0.3),
+        0 0 40px rgba(255, 182, 193, 0.2),
+        inset 0 0 20px rgba(255, 228, 225, 0.5);
+      animation: fadeInUp 1.2s ease-out;
+      max-width: 95vw;
+      width: 350px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 107, 157, 0.2);
+      z-index: 10;
+    }
+
+    /* Efek border berkilau romantis */
+    #halamanAwal::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff6b9d, #ff9a9e, #fecfef, #a8edea, #fed6e3, #ff6b9d);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      z-index: -1;
+      border-radius: 32px;
+      filter: blur(5px);
+      opacity: 0.6;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    #halamanAwal h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #ff1493;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(255, 20, 147, 0.3);
+      animation: bounceIn 1.5s ease-out;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+    }
+
+    #halamanAwal h1::after {
+      content: '✨';
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      font-size: 1.5rem;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.1); }
+      70% { transform: scale(0.95); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #halamanAwal p {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      color: #ff1493;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 3px rgba(255, 182, 193, 0.5);
+    }
+
+    #halamanAwal button {
+      background: linear-gradient(45deg, #ff1493, #ff6b9d, #c44569);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 
+        0 6px 20px rgba(255, 20, 147, 0.4),
+        0 0 30px rgba(255, 107, 157, 0.3),
+        inset 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+    }
+
+    #halamanAwal button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    #halamanAwal button:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 
+        0 8px 25px rgba(255, 20, 147, 0.6),
+        0 0 40px rgba(255, 107, 157, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    #halamanAwal button:hover::before {
+      left: 100%;
+    }
+
+    #halamanAwal button:active {
+      transform: scale(0.98);
+    }
+
+    /* ================= HALAMAN PESAN ================= */
+    #halamanPesan {
+      text-align: center;
+      padding: 45px 35px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 240, 245, 0.9));
+      border-radius: 30px;
+      box-shadow: 
+        0 20px 60px rgba(255, 20, 147, 0.25),
+        0 0 50px rgba(255, 182, 193, 0.3),
+        inset 0 0 30px rgba(255, 228, 225, 0.6);
+      animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 95vw;
+      width: 380px;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid rgba(255, 20, 147, 0.25);
+      z-index: 10;
+    }
+
+    #halamanPesan::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: linear-gradient(45deg, #ff1493, #ff6b9d, #ff9a9e, #fecfef, #a8edea, #fed6e3, #ff1493);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      z-index: -1;
+      border-radius: 33px;
+      filter: blur(8px);
+      opacity: 0.7;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-150px) rotate(-5deg); }
+      to { opacity: 1; transform: translateX(0) rotate(0); }
+    }
+
+    #halamanPesan h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: #ff1493;
+      margin-bottom: 30px;
+      text-shadow: 0 3px 15px rgba(255, 20, 147, 0.3);
+      animation: fadeIn 1s ease-out 0.5s both;
+      letter-spacing: 3px;
+      position: relative;
+    }
+
+    #halamanPesan h2::after {
+      content: '💖';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+      50% { transform: translateX(-50%) scale(1.3); opacity: 1; }
+    }
+
+    #message {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      line-height: 1.8;
+      color: #ff1493;
+      white-space: pre-line;
+      margin-bottom: 30px;
+      animation: typeIn 2.5s ease-out 1s both;
+      text-shadow: 0 1px 5px rgba(255, 182, 193, 0.5);
+      letter-spacing: 1px;
+      position: relative;
+      padding: 20px;
+      background: linear-gradient(to bottom, rgba(255, 240, 245, 0.6), rgba(255, 255, 255, 0.4));
+      border-radius: 15px;
+      border: 1px solid rgba(255, 107, 157, 0.2);
+    }
+
+    #message::before {
+      content: '"';
+      position: absolute;
+      top: -15px;
+      left: -10px;
+      font-size: 4rem;
+      color: rgba(255, 20, 147, 0.2);
+      font-family: 'Playfair Display', serif;
+    }
+
+    #message::after {
+      content: '"';
+      position: absolute;
+      bottom: -35px;
+      right: -10px;
+      font-size: 4rem;
+      color: rgba(255, 20, 147, 0.2);
+      font-family: 'Playfair Display', serif;
+    }
+
+    @keyframes typeIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    #from {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.3rem;
+      color: #ff1493;
+      margin-bottom: 25px;
+      animation: fadeIn 1s ease-out 2s both;
+      text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    #from::before {
+      content: '💌';
+      position: absolute;
+      left: -30px;
+      top: -5px;
+      font-size: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Efek hover romantis untuk teks */
+    #halamanPesan h2:hover,
+    #halamanPesan #from:hover {
+      text-shadow: 0 0 20px rgba(255, 20, 147, 0.6), 0 0 40px rgba(255, 107, 157, 0.4);
+    }
+
+    /* ================= ERROR MESSAGE ================= */
+    .error-message {
+      color: #ff1493;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: rgba(255, 240, 245, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 107, 157, 0.3);
+    }
+
+    /* ================= RESPONSIVITAS ================= */
+    @media (max-width: 480px) {
+      #halamanAwal {
+        padding: 30px 20px;
+        width: 95vw;
+      }
+
+      #halamanAwal h1 { 
+        font-size: 2.2rem;
+      }
+
+      #halamanAwal p { 
+        font-size: 1.1rem;
+      }
+
+      #halamanPesan { 
+        padding: 35px 25px;
+        width: 95vw;
+      }
+
+      #halamanPesan h2 { 
+        font-size: 1.8rem;
+      }
+
+      #message { 
+        font-size: 1.2rem;
+        padding: 15px;
+      }
+
+      #from { 
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      #halamanAwal {
+        padding: 25px 15px;
+      }
+
+      #halamanAwal h1 { 
+        font-size: 1.8rem;
+      }
+
+      #halamanAwal button {
+        padding: 14px 30px;
+        font-size: 1rem;
+      }
+
+      #halamanPesan { 
+        padding: 30px 20px;
+      }
+
+      #halamanPesan h2 { 
+        font-size: 1.6rem;
+      }
+
+      #message { 
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= ANIMATIONS BACKGROUND ================= -->
+  <div class="animations-background">
+    <div class="hearts-container"></div>
+    <div class="stars-container"></div>
+    <div class="loves-container"></div>
+    <div class="sparkles-container"></div>
+    <div class="glows-container"></div>
+  </div>
+
+  <!-- ================= HALAMAN AWAL ================= -->
+  <div id="halamanAwal">
+    <h1>💌 Pesan Spesial</h1>
+    <p>Hai Sayang 😊</p>
+    <p>Ada pesan khusus untukmu...</p>
+    <button onclick="bukaPesan()">Buka Pesan</button>
+  </div>
+
+  <!-- ================= HALAMAN PESAN ================= -->
+  <div id="halamanPesan" style="display:none;">
+    <h2 id="to">Untuk ...</h2>
+    <p id="message">Memuat pesan...</p>
+    <p id="from"></p>
+
+    <audio id="bgMusic" loop>
+      <source src="https://cdn.jsdelivr.net/gh/BlackyVin/Irjaf/vibehorn-romantic-piano-431010%20  (1).mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    /* ================= AMBIL PARAMETER URL ================= */
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id") || "default";
+
+    /* ================= VAR GLOBAL ================= */
+    const messageEl = document.getElementById("message");
+    const bgMusic = document.getElementById("bgMusic");
+    let messageData = null;
+
+    /* ================= GENERATE ANIMATIONS DINAMIS ================= */
+    function createAnimations() {
+      const heartsContainer = document.querySelector('.hearts-container');
+      const starsContainer = document.querySelector('.stars-container');
+      const lovesContainer = document.querySelector('.loves-container');
+      const sparklesContainer = document.querySelector('.sparkles-container');
+      const glowsContainer = document.querySelector('.glows-container');
+
+      // Hati emoji
+      const hearts = ['❤️', '💕', '💖', '💗', '💘', '💝', '💞', '💟', '💓'];
+      for (let i = 0; i < 8; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = `${Math.random() * 95 + 2}%`;
+        heart.style.animationDuration = `${4 + Math.random() * 2}s`;
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heartsContainer.appendChild(heart);
+      }
+
+      // Bintang emoji
+      const stars = ['✨', '⭐', '🌟', '💫'];
+      for (let i = 0; i < 8; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = `${Math.random() * 80 + 10}%`;
+        star.style.left = `${Math.random() * 80 + 10}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        star.textContent = stars[Math.floor(Math.random() * stars.length)];
+        starsContainer.appendChild(star);
+      }
+
+      // Love emoji
+      const loves = ['😍', '🌸', '🌷', '🌺', '🌹', '💕', '💖', '💗', '💘'];
+      for (let i = 0; i < 9; i++) {
+        const love = document.createElement('div');
+        love.className = 'love';
+        love.style.top = `${Math.random() * 80 + 5}%`;
+        love.style.left = `${Math.random() * 80 + 5}%`;
+        love.style.animationDelay = `${Math.random() * 8}s`;
+        love.textContent = loves[Math.floor(Math.random() * loves.length)];
+        lovesContainer.appendChild(love);
+      }
+
+      // Sparkles
+      for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.top = `${Math.random() * 80 + 10}%`;
+        sparkle.style.left = `${Math.random() * 80 + 10}%`;
+        sparkle.style.animationDelay = `${Math.random() * 4}s`;
+        sparklesContainer.appendChild(sparkle);
+      }
+
+      // Glows
+      for (let i = 0; i < 3; i++) {
+        const glow = document.createElement('div');
+        glow.className = 'glow';
+        glow.style.top = `${Math.random() * 60 + 20}%`;
+        glow.style.left = `${Math.random() * 60 + 20}%`;
+        glow.style.animationDelay = `${Math.random() * 4}s`;
+        glowsContainer.appendChild(glow);
+      }
+    }
+
+    /* ================= FETCH DATA DARI data.html ================= */
+    function loadData() {
+  return fetch('data.html')
+    .then(response => {
+      if (!response.ok) throw new Error('Gagal mengambil data');
+      return response.text();
+    })
+    .then(text => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
+      const script = doc.querySelector('script[type="application/json"]');  // Tambahkan selector untuk type
+      if (!script) throw new Error('Script JSON tidak ditemukan di data.html');
+      
+      const jsonData = script.textContent.trim();
+      const data = JSON.parse(jsonData);  // Langsung parse sebagai JSON
+      
+      if (!data[id] && !data.default) {
+        throw new Error(`ID "${id}" tidak ditemukan di data`);
+      }
+      
+      messageData = data[id] || data.default;
+      console.log('✓ Data berhasil dimuat dari data.html');
+      return true;
+    })
+    .catch(error => {
+      console.error('✗ Gagal memuat data:', error);
+      messageData = null;
+      return false;
+    });
+}
+
+    /* ================= BUKA PESAN ================= */
+    function bukaPesan() {
+      document.getElementById("halamanAwal").style.display = "none";
+      document.getElementById("halamanPesan").style.display = "block";
+
+      loadData().then(success => {
+        if (success) {
+          tampilkanPesan();
+          playMusic();
+        } else {
+          tampilkanError();
+        }
+      });
+    }
+
+    /* ================= TAMPILKAN PESAN ================= */
+    function tampilkanPesan() {
+      if (!messageData) return;
+      
+      document.getElementById("to").textContent = "Untuk " + messageData.to;
+      document.getElementById("from").textContent = "— " + messageData.from;
+      ketikPesan(messageData.pesan);
+    }
+
+    /* ================= TAMPILKAN ERROR ================= */
+    function tampilkanError() {
+      document.getElementById("to").textContent = "⚠️ Pesan Tidak Ditemukan";
+      messageEl.innerHTML = `<div class="error-message">Maaf, pesan tidak dapat dimuat.<br><small>Periksa koneksi internet atau file data.html</small></div>`;
+      document.getElementById("from").textContent = "";
+    }
+
+    /* ================= EFEK MENGETIK ================= */
+    function ketikPesan(text) {
+      messageEl.textContent = "";
+      let index = 0;
+
+      function ketik() {
+        if (index < text.length) {
+          messageEl.textContent += text.charAt(index);
+          index++;
+          setTimeout(ketik, 100);
+        }
+      }
+      ketik();
+    }
+
+    /* ================= MUSIK ================= */
+    function playMusic() {
+      bgMusic.volume = 0.3;
+      bgMusic.play().catch(() => {
+        console.log("ℹ️ Browser memblokir autoplay musik");
+      });
+    }
+
+    /* ================= INIT ================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      createAnimations();
+    });
+  </script>
+
+</body>
+</html>
